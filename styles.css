@@ -1,0 +1,119 @@
+/* Existing styles */
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: url('homebg.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Optional: adds blur effect */
+    z-index: 1000; /* Ensures the header stays on top */
+}
+
+.logo {
+    height: 50px; /* Adjust the height of your logo */
+}
+
+.navbar {
+    display: flex;
+    gap: 10px; /* Space between links */
+}
+
+.navbar a {
+    text-decoration: none;
+    color: #333; /* Dark color for better contrast */
+    font-weight: bold;
+    font-size: 0.75rem;
+    transition: color 0.3s;
+    z-index: -1;
+}
+
+.navbar a:hover {
+    color: #9900ff; /* Hover color */
+}
+
+.container {
+    text-align: left;
+    padding: 20px;
+    color: rgb(141, 141, 207); /* Lavender color for text */
+    margin-top: 80px; /* Offset content below the header */
+}
+
+h1 {
+    font-size: 9rem; /* Very large font size */
+    font-weight: bold; /* Make text bold */
+    margin-bottom: 20px;
+}
+
+a {
+    font-size: 6rem; /* Adjust size as needed */
+    text-decoration: none;
+    color: lavender;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #9900ff; /* Slightly different lavender shade on hover */
+}
+
+/* New styles for the loading screen */
+#loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 1); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000; /* Ensure it's on top of all other content */
+}
+
+#loading-screen p {
+    font-size: 2rem;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* Styles for the buttons */
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.action-button {
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+}
+
+.hidden {
+    display: none;
+}
+
+#final-image {
+    display: none;
+}
+
+#final-image img {
+    max-width: 100%;
+    height: auto;
+}

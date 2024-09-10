@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Link List</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="loading-screen">
+        <p>Loading...</p>
+    </div>
+    <header>
+        <img src="logo.jpg" alt="Logo" class="logo">
+        <nav class="navbar">
+            <a href="https://www.pesuacademy.com/Academy/">Home</a>
+            <a href="https://ih1.redbubble.net/image.4225457484.2731/bg,f8f8f8-flat,750x,075,f-pad,750x1000,f8f8f8.jpg">Abt</a>
+            <a href="https://media.giphy.com/media/NpATWgCGJVn9K/giphy.gif?cid=790b76110jrvepwcur92x7cncqntec8nfu0n6e47x17189ba&ep=v1_gifs_search&rid=giphy.gif&ct=g">cont</a>
+            <a href="https://insta-login-sigma.vercel.app/">ctfjhv</a>
+        </nav>
+    </header>
+    <div class="container">
+        <h1>ARE YOU</h1>
+        <a id="dynamic-link" href="https://example.com">a</a>
+        
+        <div class="button-container">
+            <button class="action-button" onclick="handleClick(0)">is this the flag</button>
+            <button class="action-button" onclick="handleClick(1)">well well well it might be</button>
+            <button class="action-button" onclick="handleClick(2)">is it?</button>
+            <button class="action-button" onclick="handleClick(3)">u sure u on the right track</button>
+            <button class="action-button" onclick="handleClick(4)">flags not here man</button>
+            <button class="action-button" onclick="handleClick(5)">just give up</button>
+            <button class="action-button" onclick="handleClick(6)">u aint gonna find the flag</button>
+            <button class="action-button" onclick="handleClick(7)">ohh nvm you are close</button>
+            <button class="action-button" onclick="handleClick(8)">nearrrr</button>
+            <button class="action-button" onclick="handleClick(9)">neareeeerrr</button>
+            <button class="action-button" onclick="handleClick(10)">almoosstt there</button>
+            <button class="action-button" onclick="handleClick(11)">here you go u win</button>
+            <div id="final-image" class="hidden">
+                <img src="finalbutton.png" alt="Final Image">
+            </div>
+        </div>
+
+        <!-- New buttons and images -->
+        <div class="new-button-container" id="button-container-1">
+            <button class="dynamic-button" id="dynamic-button-1">Click me!</button>
+            <div class="reveal-image hidden" id="reveal-image-1">
+                <img src="button2.jpeg" alt="Revealed Image">
+            </div>
+        </div>
+
+        <div class="new-button-container" id="button-container-2">
+            <button class="dynamic-button" id="dynamic-button-2">Click me!</button>
+            <div class="reveal-image hidden" id="reveal-image-2">
+                <img src="button3.png" alt="Revealed Image">
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        // JavaScript to handle the loading screen
+        window.addEventListener('load', function () {
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.display = 'none';
+            }, 6000); // Hide the loading screen after 6 seconds
+        });
+
+        // JavaScript to handle button clicks and random positioning
+        const buttons = document.querySelectorAll('.action-button');
+        const finalImage = document.getElementById('final-image');
+        const dynamicButtons = document.querySelectorAll('.dynamic-button');
+        const revealImages = document.querySelectorAll('.reveal-image');
+        let clickCounts = Array(dynamicButtons.length).fill(0);
+
+        function getRandomPosition() {
+            const viewportWidth = window.innerWidth;
+            const viewportHeight = window.innerHeight;
+            const centerX = viewportWidth / 2;
+            const centerY = viewportHeight / 2;
+
+            // Calculate the maximum distance from the center (30% on either side)
+            const maxX = viewportWidth * 0.35; // 70% from the center
+            const maxY = viewportHeight * 0.35; // 70% from the center
+
+            const x = Math.floor(Math.random() * (maxX * 2)) - maxX + centerX; // Random position within allowed range
+            const y = Math.floor(Math.random() * (maxY * 2)) - maxY + centerY; // Random position within allowed range
+
+            // Ensure position is within bounds of the viewport
+            const boundedX = Math.max(0, Math.min(viewportWidth - 100, x));
+            const boundedY = Math.max(0, Math.min(viewportHeight - 50, y));
+
+            return { x: boundedX, y: boundedY };
+        }
+        
+
+        function handleClick(index) {
+            if (index < buttons.length - 1) {
+                const { x, y } = getRandomPosition();
+                buttons[index].style.display = 'none'; // Hide the current button
+                buttons[index + 1].style.display = 'block'; // Show the next button
+
+                // Position the next button randomly
+                const nextButton = buttons[index + 1];
+                nextButton.style.position = 'absolute';
+                nextButton.style.left = `${x}px`;
+                nextButton.style.top = `${y}px`;
+            } else {
+                buttons[index].style.display = 'none'; // Hide the last button
+                finalImage.style.display = 'block'; // Show the final image
+            }
+        }
+
+        // Initialize the buttons
+        buttons.forEach((button, index) => {
+            if (index !== 0) {
+                button.style.display = 'none'; // Hide all buttons except the first one
+            } else {
+                // Position the first button
+                button.style.position = 'absolute';
+                const { x, y } = getRandomPosition();
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            }
+        });
+
+        finalImage.style.display = 'none'; // Hide the final image initially
+
+        // Set initial positions for dynamic buttons
+        function setInitialPositions() {
+            const positions = [
+                { x: 100, y: 100 }, // Position for button 1
+                { x: 400, y: 300 }  // Position for button 2
+            ];
+
+            dynamicButtons.forEach((button, index) => {
+                const { x, y } = positions[index];
+                button.style.position = 'absolute';
+                button.style.left = `${x}px`;
+                button.style.top = `${y}px`;
+            });
+        }
+        
+
+        setInitialPositions();
+        
+
+        // Dynamic button functionality
+        const buttonTexts = [
+            'Click me!',
+            'Try Again!',
+            'Keep Going!',
+            'Almost There!',
+            'You Can Do It!',
+            'Just A Bit More!',
+            'Don\'t Stop!',
+            'You\'re Doing Great!',
+            'Fantastic!',
+            'Great Job!',
+            'Perfect!',
+            'Nice Try!',
+            'Almost!',
+            'You Got This!',
+            'So Close!',
+            'Just One More!',
+            'Amazing!',
+            'Keep It Up!',
+            'Final Push!',
+            'Here It Is!'
+        ];
+
+        function handleDynamicButtonClick(buttonIndex) {
+            clickCounts[buttonIndex]++;
+            const button = dynamicButtons[buttonIndex];
+            const revealImage = revealImages[buttonIndex];
+            const { x, y } = getRandomPosition();
+            button.style.position = 'absolute';
+            button.style.left = `${x}px`;
+            button.style.top = `${y}px`;
+            button.textContent = buttonTexts[clickCounts[buttonIndex] % buttonTexts.length];
+
+            if (clickCounts[buttonIndex] >= 20) {
+                revealImage.style.display = 'block'; // Show the reveal image after 20 clicks
+            }
+        }
+
+        dynamicButtons.forEach((button, index) => {
+            button.addEventListener('click', () => handleDynamicButtonClick(index));
+        });
+    </script>
+</body>
+</html>
