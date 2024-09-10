@@ -40,7 +40,6 @@ header {
     font-weight: bold;
     font-size: 0.75rem;
     transition: color 0.3s;
-    z-index: -1;
 }
 
 .navbar a:hover {
